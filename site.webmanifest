@@ -1,0 +1,9 @@
+{
+  "name": "A life in little places — Reyhan Lama",
+  "short_name": "Little Places",
+  "description": "An explorable pixel-art portfolio set in a mountain village.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#233a38",
+  "theme_color": "#233a38"
+}
