@@ -72,7 +72,6 @@ function renderRoom(place) {
  $('#room .eyebrow').textContent=room.eyebrow;
  $('#room h2').textContent=place.name;
  $('#room .room-description').textContent=room.description;
- $('#room-index').innerHTML=room.objects.map((o,i)=>`<button data-room-object="${i}">${o.name}<span>↗</span></button>`).join('');
  $('#room').hidden=false; $('#room').inert=false;
  const view=$('#room-viewport');
  restorePosition(view, travelState.rooms[place.id], place.id==='tea'?.57:.5, .5);

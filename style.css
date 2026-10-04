@@ -85,16 +85,11 @@
 .room-hotspot.label-left .object-label{left:auto;right:0;transform:translateY(4px)}
 .room-hotspot.label-left:hover .object-label,.room-hotspot.label-left:focus-visible .object-label{transform:translateY(0)}
 .room-welcome{bottom:30px;max-width:48%}.room-welcome h2{font-size:49px}.room-shade{background:linear-gradient(0deg,#27180cb3,transparent 32%)}
-#room-index{position:absolute;right:28px;bottom:30px;display:flex;gap:8px;max-width:48%;flex-wrap:wrap;justify-content:flex-end;z-index:3}
-#room-index button{background:#fff0d4ef;border:1px solid #785539;padding:11px 14px;text-align:left;font:21px var(--pixel);box-shadow:2px 3px #35251b50;border-radius:3px}
-#room-index span{margin-left:12px;color:#9c4d35}
 @media(max-width:600px){
  #village-character{width:52px;height:76px}
  #room-scene{width:100vw;height:66.6667vw;left:0;top:47%;transform:translateY(-50%)}
  #room-scene>img{position:static;width:100%;height:100%;object-fit:contain}
  .room-welcome{left:20px;bottom:142px;max-width:90%}.room-welcome h2{font-size:36px;margin:5px 0}.room-welcome .eyebrow{font-size:8px;letter-spacing:1.6px}.room-welcome>p:last-child{font-size:11px;line-height:1.4}
- #room-index{bottom:24px;left:20px;right:20px;max-width:none;justify-content:flex-start}
- #room-index button{font-size:19px;padding:10px 12px}
  .room-hotspot{width:44px;height:44px}.object-dot{left:16px;top:16px}
  .room-hotspot .object-label{display:none}
  .map-hint{display:block;left:15px;bottom:125px;transform:none;font-size:16px;background:#20352fdb}
@@ -112,10 +107,8 @@
 #room-drag-hint{position:absolute;top:90px;left:30px;color:#fff2d0;background:#3c2b20a8;padding:7px 11px;border-radius:3px;font:18px var(--pixel);pointer-events:none}
 @media(max-width:600px){
  #room-scene{width:150svh;height:100svh;min-width:100%;left:0;top:0;transform:none}
- .room-welcome{left:20px;right:20px;bottom:89px;max-width:none}
+ .room-welcome{left:20px;right:20px;bottom:max(20px,env(safe-area-inset-bottom));max-width:none}
  .room-welcome h2{font-size:36px}.room-welcome .eyebrow{display:none}.room-welcome .room-description{font-size:12px;margin:5px 0}
- #room-index{left:15px;right:15px;bottom:max(19px,env(safe-area-inset-bottom));max-width:none;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;padding:3px 3px 7px;gap:7px}
- #room-index button{flex:0 0 auto;white-space:nowrap;font-size:18px;padding:12px}
  #room-drag-hint{top:76px;left:15px;font-size:17px}
  .room-shade{background:linear-gradient(0deg,#27190fe6,transparent 28%)}
 }
