@@ -12,12 +12,15 @@
  const busCtx = bus.getContext('2d');
 
  const cloud = '<img src="assets/mountain-cloud.webp" alt="" draggable="false">';
+ const summitFog=`<div class="summit-fog">${[
+  ['3%','1%','76%','.58'],['8%','23%','68%','.46'],['36%','9%','84%','.4']
+ ].map(([top,left,width,opacity])=>`<img src="assets/mountain-cloud.webp" alt="" draggable="false" style="top:${top};left:${left};width:${width};opacity:${opacity}">`).join('')}</div>`;
  const flags=(name,x,y,width,tilt,delay)=>`<div class="prayer-flags ${name}" style="left:${x}%;top:${y}%;width:${width}%;--tilt:${tilt}deg;--flag-delay:${delay}s">${['#d8654b','#efbd45','#4e8b77','#527cab','#eee0bd','#d8654b','#efbd45'].map((color,i)=>`<i style="--flag:${color};--i:${i}"></i>`).join('')}</div>`;
  const petals=`<div class="petal-field">${Array.from({length:10},(_,i)=>`<i style="--px:${10+(i*17)%75}%;--py:${45+(i*11)%35}%;--petal-delay:${i*-2.7}s;--petal-duration:${17+(i%4)*4}s"></i>`).join('')}</div>`;
  atmosphere.innerHTML = [
   [20,7,13,58,-9],[56,3,12,74,-27],[65,22,18,67,-14],[78,30,14,81,-39]
  ].map(([x,y,w,d,delay])=>`<div class="moving-cloud" style="left:${x}%;top:${y}%;width:${w}%;--duration:${d}s;--delay:${delay}s">${cloud}</div>`).join('') +
- `<div class="chimney-smoke" style="left:39.8%;top:48.4%">${Array.from({length:5},(_,i)=>`<i style="--delay:${i*-1.15}s"></i>`).join('')}</div>`+
+ summitFog+`<div class="chimney-smoke" style="left:39.8%;top:48.4%">${Array.from({length:5},(_,i)=>`<i style="--delay:${i*-1.15}s"></i>`).join('')}</div>`+
  flags('monastery-flags',37.1,20.4,11,-4,-1.4)+flags('ridge-flags',84.1,15.6,10,7,-3.1)+petals;
  // The paving and stone embankment are drawn at the map's native resolution.
  // A seeded palette keeps the hand-laid stones stable between visits.

@@ -12,6 +12,8 @@
 #atmosphere{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .moving-cloud{position:absolute;opacity:.32;animation:cloud-pass var(--duration) linear var(--delay) infinite;will-change:transform}
 .moving-cloud img{display:block;width:100%;height:auto}
+.summit-fog{position:absolute;left:61%;top:8%;width:43%;height:25%;opacity:0;animation:summit-fog-pass 44s ease-in-out -12s infinite;will-change:transform,opacity}
+.summit-fog img{position:absolute;height:auto;filter:saturate(.78) brightness(1.08);image-rendering:pixelated}
 .chimney-smoke{position:absolute;width:2.1%;height:3.1%}
 .chimney-smoke i,.room-steam i{position:absolute;bottom:0;left:0;width:70%;height:50%;background:#eee8d8;opacity:0;clip-path:polygon(20% 0,70% 0,70% 18%,90% 18%,90% 40%,100% 40%,100% 74%,75% 74%,75% 100%,25% 100%,25% 84%,0 84%,0 25%,20% 25%);animation:smoke-rise 5.75s linear var(--delay) infinite;transform-origin:50% 100%}
 .prayer-flags{position:absolute;height:3.8%;display:flex;align-items:flex-start;justify-content:space-around;transform:rotate(var(--tilt));transform-origin:left center;filter:drop-shadow(0 1px 0 #3a4c3a66)}
@@ -26,8 +28,9 @@
 #hill-bus{z-index:1}
 
 #world .landscape{image-rendering:pixelated}
-.scenery-paused .moving-cloud,.scenery-paused .chimney-smoke i,.scenery-paused .room-steam i,.scenery-paused #hill-bus img,.scenery-paused .mote{animation-play-state:paused}
+.scenery-paused .moving-cloud,.scenery-paused .summit-fog,.scenery-paused .chimney-smoke i,.scenery-paused .room-steam i,.scenery-paused #hill-bus img,.scenery-paused .mote{animation-play-state:paused}
 @keyframes cloud-pass{0%{transform:translateX(-30%);opacity:0}12%{opacity:.32}85%{opacity:.32}100%{transform:translateX(85%);opacity:0}}
+@keyframes summit-fog-pass{0%{transform:translateX(-46%) translateY(2%);opacity:0}12%{opacity:.36}27%{opacity:.72}52%{opacity:.5}69%{transform:translateX(48%) translateY(-3%);opacity:0}100%{transform:translateX(58%) translateY(-3%);opacity:0}}
 @keyframes smoke-rise{0%{opacity:0;transform:translate(-40%,0) scale(.35)}14%{opacity:.5}45%{opacity:.32}100%{opacity:0;transform:translate(45%,-390%) scale(1.65)}}
 
 #room{overflow:auto;scrollbar-width:none}
@@ -50,7 +53,7 @@
  .room-welcome{bottom:16px}
  .map-controls .visited{font-size:14px;padding:0 4px}
 }
-@media(prefers-reduced-motion:reduce){.moving-cloud,.chimney-smoke,.room-steam,.petal-field{display:none}.prayer-flags i{animation:none}#hill-bus img{animation:none}}
+@media(prefers-reduced-motion:reduce){.moving-cloud,.summit-fog,.chimney-smoke,.room-steam,.petal-field{display:none}.prayer-flags i{animation:none}#hill-bus img{animation:none}}
 
 /* A quiet map: building markers reveal their names only on intent. */
 .place{width:44px;height:44px;min-width:44px;padding:0;transform:translate(-50%,-50%);border-radius:50%;overflow:visible}
