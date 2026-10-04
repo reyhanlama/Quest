@@ -87,3 +87,9 @@ Before announcing a permanent public launch:
 2. Add a direct contact email to `contactEmail` in `content.js` if desired.
 3. Once the Netlify or custom domain is known, change `og:image` in `index.html` to the absolute URL of `share-card.webp`, and add a canonical link plus a sitemap using that domain.
 4. Keep Netlify deploy previews enabled and check one on iPhone Safari, Android Chrome, Firefox, and a slow mobile connection before promoting it to production.
+
+## Ambient life
+
+The optional Sound control now combines low wind with a procedurally synthesized, low-pitched temple bell. A bell sounds shortly after activation and then at irregular 22–38 second intervals with a long decay; no audio file or licensed recording is used. Audio stops scheduling while the tab is hidden and always requires an explicit visitor gesture.
+
+Two small prayer-flag strings and occasional rhododendron petals are DOM overlays in `scenery.js`. They share the illustrated map plane, pause with the Scenery control, and respect reduced-motion preferences. Clouds, chimney smoke, the bus, flags, and petals are the intended motion budget; adding movement to trees, houses, or every decorative object would weaken the map’s calm focal hierarchy.

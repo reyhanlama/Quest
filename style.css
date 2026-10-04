@@ -14,6 +14,14 @@
 .moving-cloud img{display:block;width:100%;height:auto}
 .chimney-smoke{position:absolute;width:2.1%;height:3.1%}
 .chimney-smoke i,.room-steam i{position:absolute;bottom:0;left:0;width:70%;height:50%;background:#eee8d8;opacity:0;clip-path:polygon(20% 0,70% 0,70% 18%,90% 18%,90% 40%,100% 40%,100% 74%,75% 74%,75% 100%,25% 100%,25% 84%,0 84%,0 25%,20% 25%);animation:smoke-rise 5.75s linear var(--delay) infinite;transform-origin:50% 100%}
+.prayer-flags{position:absolute;height:3.8%;display:flex;align-items:flex-start;justify-content:space-around;transform:rotate(var(--tilt));transform-origin:left center;filter:drop-shadow(0 1px 0 #3a4c3a66)}
+.prayer-flags:before{content:'';position:absolute;top:1px;left:0;right:0;height:1px;background:#594630}
+.prayer-flags i{width:9%;height:58%;background:var(--flag);clip-path:polygon(0 0,100% 7%,83% 100%,9% 86%);transform-origin:50% 0;animation:flag-breathe 3.8s ease-in-out calc(var(--flag-delay) + var(--i)*-.19s) infinite;image-rendering:pixelated}
+.petal-field{position:absolute;inset:0;overflow:hidden}
+.petal-field i{position:absolute;left:var(--px);top:var(--py);width:4px;height:3px;background:#f2a5bb;box-shadow:2px 0 #d8799b;opacity:0;animation:petal-fall var(--petal-duration) linear var(--petal-delay) infinite}
+.scenery-paused .prayer-flags i,.scenery-paused .petal-field i{animation-play-state:paused}
+@keyframes flag-breathe{0%,100%{transform:skewY(-2deg) scaleX(.88)}50%{transform:skewY(10deg) scaleX(1.08)}}
+@keyframes petal-fall{0%{opacity:0;transform:translate(0,-8px) rotate(0)}10%{opacity:.75}75%{opacity:.5}100%{opacity:0;transform:translate(80px,95px) rotate(360deg)}}
 #village-road,#hill-bus{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;image-rendering:pixelated}
 #hill-bus{z-index:1}
 
@@ -42,7 +50,7 @@
  .room-welcome{bottom:16px}
  .map-controls .visited{font-size:14px;padding:0 4px}
 }
-@media(prefers-reduced-motion:reduce){.moving-cloud,.chimney-smoke,.room-steam{display:none}#hill-bus img{animation:none}}
+@media(prefers-reduced-motion:reduce){.moving-cloud,.chimney-smoke,.room-steam,.petal-field{display:none}.prayer-flags i{animation:none}#hill-bus img{animation:none}}
 
 /* A quiet map: building markers reveal their names only on intent. */
 .place{width:44px;height:44px;min-width:44px;padding:0;transform:translate(-50%,-50%);border-radius:50%;overflow:visible}
