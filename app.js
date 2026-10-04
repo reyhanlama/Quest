@@ -109,7 +109,8 @@ function showPage(page) {
 document.addEventListener('click', async e => {
  const b = e.target.closest('button'); if(!b)return;
  if(b.dataset.place) {
-  if(b.classList.contains('place') && matchMedia('(hover: none)').matches && !b.classList.contains('touch-reveal')) {
+  const clickedLabel=Boolean(e.target.closest('.sign'));
+  if(b.classList.contains('place') && !clickedLabel && matchMedia('(hover: none)').matches && !b.classList.contains('touch-reveal')) {
    document.querySelectorAll('.touch-reveal').forEach(el=>el.classList.remove('touch-reveal')); b.classList.add('touch-reveal'); return;
   }
   enterPlace(b.dataset.place);
@@ -145,9 +146,14 @@ let drag;
 $('#map-viewport').addEventListener('pointerdown',e=>{if(e.target.closest('button')||currentPlace)return;drag={x:e.clientX,y:e.clientY,left:$('#map-viewport').scrollLeft,top:$('#map-viewport').scrollTop};$('#map-viewport').setPointerCapture(e.pointerId);$('#map-viewport').classList.add('dragging');});
 $('#map-viewport').addEventListener('pointermove',e=>{if(!drag)return;$('#map-viewport').scrollLeft=drag.left-e.clientX+drag.x;$('#map-viewport').scrollTop=drag.top-e.clientY+drag.y;});
 for(const event of ['pointerup','pointercancel']) $('#map-viewport').addEventListener(event,()=>{drag=null;$('#map-viewport').classList.remove('dragging');});
-async function toggleSound() {
+function syncSoundControl(on) {
+ $('#sound').setAttribute('aria-pressed',String(on));
+ $('#sound').setAttribute('aria-label',on?'Turn off ambient sound':'Turn on ambient sound');
+ $('#sound span').textContent=on?'Sound on':'Sound off';
+}
+async function setAmbientSound(on) {
  try {
- if(!audioContext) {
+ if(on&&!audioContext) {
   audioContext=new (window.AudioContext||window.webkitAudioContext)();audioGain=audioContext.createGain();audioGain.gain.value=0;audioGain.connect(audioContext.destination);
   bellBus=audioContext.createGain();bellBus.gain.value=.72;bellBus.connect(audioGain);
   const buffer=audioContext.createBuffer(1,audioContext.sampleRate*4,audioContext.sampleRate),data=buffer.getChannelData(0);let last=0;
@@ -155,10 +161,18 @@ async function toggleSound() {
   const source=audioContext.createBufferSource(),filter=audioContext.createBiquadFilter(),windGain=audioContext.createGain();
   source.buffer=buffer;source.loop=true;filter.type='lowpass';filter.frequency.value=520;windGain.gain.value=.6;source.connect(filter);filter.connect(windGain);windGain.connect(audioGain);source.start();
  }
- await audioContext.resume();const on=$('#sound').getAttribute('aria-pressed')!=='true';audioGain.gain.setTargetAtTime(on?.32:0,audioContext.currentTime,.5);$('#sound').setAttribute('aria-pressed',String(on));$('#sound').setAttribute('aria-label',on?'Turn off ambient sound':'Turn on ambient sound');$('#sound span').textContent=on?'Sound on':'Sound off';
- clearTimeout(bellTimer);if(on)scheduleBell(1200);
+ if(on)await audioContext.resume();
+ if(audioGain)audioGain.gain.setTargetAtTime(on?.32:0,audioContext.currentTime,.5);
+ syncSoundControl(on);clearTimeout(bellTimer);if(on&&audioContext.state==='running')scheduleBell(1200);
  } catch { announce('Ambient sound is unavailable in this browser.'); }
 }
+function toggleSound(){setAmbientSound($('#sound').getAttribute('aria-pressed')!=='true');}
+function unlockDefaultSound(e){
+ if(e.type==='keydown'&&['Tab','Shift','Control','Alt','Meta'].includes(e.key))return;
+ removeEventListener('pointerdown',unlockDefaultSound,true);removeEventListener('keydown',unlockDefaultSound,true);
+ if(!e.target.closest?.('#sound')&&$('#sound').getAttribute('aria-pressed')==='true')setAmbientSound(true);
+}
+addEventListener('pointerdown',unlockDefaultSound,true);addEventListener('keydown',unlockDefaultSound,true);
 function playTempleBell(){
  if(!audioContext||document.hidden||$('#sound').getAttribute('aria-pressed')!=='true')return;
  const now=audioContext.currentTime,base=174+Math.random()*9,strikeBus=audioContext.createGain(),pan=audioContext.createStereoPanner?.();
@@ -169,7 +183,7 @@ function playTempleBell(){
  const echo=audioContext.createDelay(2.5),echoGain=audioContext.createGain();echo.delayTime.value=1.35;echoGain.gain.value=.16;strikeBus.connect(echo);echo.connect(echoGain);echoGain.connect(bellBus);setTimeout(()=>{try{strikeBus.disconnect();pan?.disconnect();echo.disconnect();echoGain.disconnect();}catch{}},13000);
 }
 function scheduleBell(delay=22000+Math.random()*16000){clearTimeout(bellTimer);bellTimer=setTimeout(()=>{playTempleBell();scheduleBell();},delay);}
-document.addEventListener('visibilitychange',()=>{clearTimeout(bellTimer);if(!document.hidden&&$('#sound').getAttribute('aria-pressed')==='true')scheduleBell(3000);});
+document.addEventListener('visibilitychange',()=>{clearTimeout(bellTimer);if(!document.hidden&&audioContext?.state==='running'&&$('#sound').getAttribute('aria-pressed')==='true')scheduleBell(3000);});
 renderMap();
 $('.fireflies').innerHTML=Array.from({length:14},(_,i)=>`<i class="mote" style="left:${12+(i*17)%80}%;top:${38+(i*13)%57}%;animation-delay:${i*-.8}s"></i>`).join('');
 const loadingScreen=$('#loading-screen'),mainLandscape=$('.landscape');

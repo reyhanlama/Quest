@@ -90,6 +90,6 @@ Before announcing a permanent public launch:
 
 ## Ambient life
 
-The optional Sound control now combines low wind with a procedurally synthesized, low-pitched temple bell. A bell sounds shortly after activation and then at irregular 22–38 second intervals with a long decay; no audio file or licensed recording is used. Audio stops scheduling while the tab is hidden and always requires an explicit visitor gesture.
+The Sound control defaults to on and combines low wind with a procedurally synthesized, low-pitched temple bell. Browsers begin playback on the visitor's first interaction, then a bell sounds shortly afterward and at irregular 22–38 second intervals with a long decay; no audio file or licensed recording is used. Audio stops scheduling while the tab is hidden.
 
 Two small prayer-flag strings and occasional rhododendron petals are DOM overlays in `scenery.js`. They share the illustrated map plane, pause with the Scenery control, and respect reduced-motion preferences. Clouds, chimney smoke, the bus, flags, and petals are the intended motion budget; adding movement to trees, houses, or every decorative object would weaken the map’s calm focal hierarchy.
