@@ -57,3 +57,15 @@
  .album-shelf{grid-template-columns:1fr;gap:30px;padding:10px 13px}.album-cover:nth-child(2){padding-top:0}.album-picture img{height:235px}.album-cover>strong{font-size:30px;margin-top:18px}.album-cover>span:last-child{font-size:11px}.album-view-title{margin-top:21px}.destination .album-view-title h2{font-size:30px}.destination .album-view-title .eyebrow{font-size:8px;letter-spacing:1.3px}.photo-frame>img{height:37svh;min-height:180px}.photo-frame{padding:6px}.photo-frame figcaption{font-size:12px}.album-navigation{gap:10px}.filmstrip{gap:3px}.filmstrip img{width:46px;height:35px}.photo-arrow{width:40px;flex:0 0 40px}.destination .album-key-hint{font-size:9px;flex-wrap:wrap;gap:8px}
 }
 @media(max-width:350px){.journal-shelf{grid-template-columns:1fr}.journal-book{min-height:280px}.journal-book strong{font-size:36px}.book-number{font-size:9px}.book-progress{font-size:16px}.reader-toolbar{flex-wrap:wrap}}
+
+/* Real portfolio content: editorial structure, project imagery, and photographs. */
+.destination .essay-body li{font:18px/1.85 Georgia,serif;color:#423b31;margin:0 0 10px}
+.essay-body h3{font:34px/1.2 var(--pixel);font-weight:400;margin:46px 0 18px}
+.essay-body h4{font:700 18px/1.5 Georgia,serif;color:#544437;margin:32px 0 13px}
+.essay-body ul{margin:0 0 28px;padding-left:25px}
+.destination .large-text .essay-body li{font-size:22px}
+.image-preview img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.case-link{display:inline-block;margin:0 0 30px}
+.album-picture img,.photo-frame>img,.filmstrip img{image-rendering:auto}
+@media(max-width:800px){.project-card:last-child{grid-column:auto;max-width:none}}
+@media(max-width:600px){.destination .essay-body li{font-size:17px}.destination .large-text .essay-body li{font-size:21px}.essay-body h3{font-size:30px}}

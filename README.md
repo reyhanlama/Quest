@@ -15,17 +15,17 @@ Open http://localhost:4173. No install or build step is required. Nothing is dep
 ## Explore
 
 - Click a signpost to zoom toward a destination.
-- Enter the tea house and click its bookshelf or open notebook to read sample writing.
+- Enter the tea house and click its bookshelf or open notebook to read Reyhan’s essays and field notes.
 - Use the Places menu for direct navigation, including on mobile.
 - Drag or swipe the map to explore; use Back to the village or Escape to return.
 - The red bus follows the stone road; cloud banks drift and tea-house smoke rises.
 - Use the scenery pause button to stop ambient movement. Reduced-motion preferences are respected, and animation pauses when the browser tab is hidden.
-- Sound is opt-in, synthesized locally through Web Audio.
+- Sound is enabled by default and begins after the visitor’s first interaction, as required by browser audio policies. It is synthesized locally through Web Audio.
 - Visited places are saved only in this browser.
 
 ## Add your content
 
-Edit `content.js` to replace sample writing, project entries, and destination descriptions. Set `contactEmail` to enable the email link. The letter form only copies a draft and never sends it. Biography text and the sample journey are in `index.html` and `app.js`. Photography currently has a placeholder entry; no personal photographs were supplied.
+Portfolio copy, writing, destinations, email, and social links live in `content.js`. Project case studies and photography collections live in `experience-content.js`. The Netlify-ready letter form posts to the site root.
 
 The app uses vanilla HTML, CSS, and JavaScript. Fonts load from Google Fonts with local fallback fonts if offline. Illustrations are stored locally in `assets/`.
 
@@ -67,11 +67,11 @@ The map and introduction now use `assets/character-compact.webp`. Created with t
 ## Collections and reading (October 2026)
 
 - **Tea House:** Cloth-cover bookshelf, essays and field notes, a saved shelf, a long-form reader, adjustable type size, and locally remembered reading progress.
-- **Design Studio:** Three project sheets and detailed case-study views, with the actual village prototype plus two explicitly fictional projects, Hillpost and Margin. Product sketches use HTML/CSS.
-- **Forest Cabin:** Three albums and a lightbox with thumbnail, previous/next, and keyboard-arrow navigation. Existing illustrated village assets are labelled as placeholders for future photography.
-- **Navigation:** Places works inside rooms at every screen size. Map and room positions persist locally. Collection URLs support reload and browser Back, for example `#tea/read/attention`, `#studio/project/hillpost`, and `#trail/album/hillside/1`.
+- **Design Studio:** Three selected public-sector and travel projects with detailed case-study views.
+- **Forest Cabin:** Three albums of Reyhan’s photographs with thumbnail, previous/next, and keyboard-arrow navigation.
+- **Navigation:** Places works inside rooms at every screen size. Map and room positions persist locally. Collection URLs support reload and browser Back, for example `#tea/read/designer-boundary-moved`, `#studio/project/lakshadweep`, and `#trail/album/roads/1`.
 
-`experience-content.js` owns the current sample writing, projects, and albums. It loads after `content.js` and replaces its earlier writing samples. Update `window.villageCollection` and `window.journalContent.writings` there to add real content. Each album's `photos` entry accepts a local image filename, title, caption, and position. All current editorial pieces and projects marked fictional are demonstration content authorised by the user, not claims about their career.
+`experience-content.js` owns the project and album collections. Writing lives in `content.js`. Each album’s `photos` entry accepts a local image filename, title, caption, and position.
 
 `experiences.js` implements collections, route restoration, and local reading/navigation state. `experiences.css` contains their responsive styles. No account, backend, analytics, or deployment is required. Reading state uses `mountain-journal-reading`; navigation uses `mountain-journal-travel` in browser local storage. The original visited-place state remains separate.
 
@@ -79,14 +79,13 @@ The map and introduction now use `assets/character-compact.webp`. Created with t
 
 This repository is ready to deploy as a static Netlify site. Connect the GitHub repository in Netlify and use the defaults detected from `netlify.toml`; there is no build command and the publish directory is `.`.
 
-The published bundle contains only active WebP artwork and is roughly 3 MB. Netlify receives the Post Office form through its built-in form handling; after the first production deploy, enable form notifications in the Netlify dashboard if you want submissions forwarded by email.
+The published bundle contains local artwork, project previews, and photographs. Netlify receives the Post Office form through its built-in form handling; after the first production deploy, enable form notifications in the Netlify dashboard if you want submissions forwarded by email.
 
 Before announcing a permanent public launch:
 
-1. Replace fictional projects, sample writing, and illustrated photo placeholders in `experience-content.js`.
-2. Add a direct contact email to `contactEmail` in `content.js` if desired.
-3. Once the Netlify or custom domain is known, change `og:image` in `index.html` to the absolute URL of `share-card.webp`, and add a canonical link plus a sitemap using that domain.
-4. Keep Netlify deploy previews enabled and check one on iPhone Safari, Android Chrome, Firefox, and a slow mobile connection before promoting it to production.
+1. Review and refine the imported portfolio copy and project case-study details.
+2. Once the Netlify or custom domain is known, change `og:image` in `index.html` to the absolute URL of `share-card.webp`, and add a canonical link plus a sitemap using that domain.
+3. Keep Netlify deploy previews enabled and check one on iPhone Safari, Android Chrome, Firefox, and a slow mobile connection before promoting it to production.
 
 ## Ambient life
 
